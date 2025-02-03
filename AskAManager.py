@@ -1,3 +1,8 @@
+# Three specific pre-processing methods used
+# Handling Missing Values for Salary Column
+# Standarization Salary Column
+# Clean and Categorizing it
+
 import pandas as pd
 import re
 
@@ -22,7 +27,7 @@ def clean_salary(salary):
 
 df["Salary"] = df["Salary"].apply(clean_salary)
 
-# Remove rows where salary couldn't be converted to a number
+# Remove rows where salary couldn't be converted to a number **Updated, had some trouble with this but managed to clean it up
 df = df.dropna(subset=["Salary"])
 
 # Step 3: Cleaning and Categorizing Job Titles
