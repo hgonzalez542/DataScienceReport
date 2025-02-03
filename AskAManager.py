@@ -1,14 +1,9 @@
-# The Three key preprocessing methods used for this survey
-# Handling Missing Values
-# Standarizing
-# Cleaning and Categorizing
-
 import pandas as pd
 import re
 
 # Load the dataset
 file_path = "Ask A Manager Salary Survey 2021 (Responses) - Form Responses 1.csv"
-df = pd.read_csv(file_path)
+df = pd.read_csv(file_path) 
 
 # Rename columns for easier access
 df.rename(columns={
@@ -21,9 +16,6 @@ df = df.dropna(subset=["Salary"])  # Remove rows where Salary is missing
 
 # Step 2: Standardizing Salary Formats
 def clean_salary(salary):
-    """
-    Converts salary strings into a standardized numerical format.
-    """
     salary = str(salary).lower().replace(',', '')  # Remove commas
     salary = re.sub(r'[^\d]', '', salary)  # Remove non-numeric characters
     return int(salary) if salary.isdigit() else None  # Convert to integer
@@ -58,6 +50,9 @@ def standardize_job_title(title):
 
 df["Job Title"] = df["Job Title"].apply(standardize_job_title)
 
-# Display cleaned data
-import ace_tools as tools
-tools.display_dataframe_to_user(name="Cleaned Salary Data", dataframe=df)
+# Display the cleaned dataset (first 10 rows)
+print(df.head(10))
+
+# Save cleaned data to a new CSV file
+df.to_csv("cleaned_salary_data.csv", index=False)
+print("Cleaned data saved as 'cleaned_salary_data.csv'")
